@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uft2l1lsvt4q"
-path="res://.godot/imported/acc_glasses.png-d867615c4d9295700e478e220aa7990c.ctex"
+uid="uid://bsbr655nk1s27"
+path="res://.godot/imported/bottom_skirt.png-e35348b0225d2b17c9a7e7060a6a726e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/acc_glasses.png"
-dest_files=["res://.godot/imported/acc_glasses.png-d867615c4d9295700e478e220aa7990c.ctex"]
+source_file="res://assets/bottom/bottom_skirt.png"
+dest_files=["res://.godot/imported/bottom_skirt.png-e35348b0225d2b17c9a7e7060a6a726e.ctex"]
 
 [params]
 

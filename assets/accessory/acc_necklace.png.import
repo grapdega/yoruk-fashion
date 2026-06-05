@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://da26418e3db6x"
-path="res://.godot/imported/hair_curly.png-c92a9e090fef1a8b0793996c6ddde302.ctex"
+uid="uid://nt1ujnmq6ngf"
+path="res://.godot/imported/acc_necklace.png-b843dbe23770fb03f635a7f39ee73067.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hair_curly.png"
-dest_files=["res://.godot/imported/hair_curly.png-c92a9e090fef1a8b0793996c6ddde302.ctex"]
+source_file="res://assets/accessory/acc_necklace.png"
+dest_files=["res://.godot/imported/acc_necklace.png-b843dbe23770fb03f635a7f39ee73067.ctex"]
 
 [params]
 

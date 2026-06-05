@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cl4skt68np5x"
-path="res://.godot/imported/top_dress.png-add3284585e75ba9295a40a4d25f6cd2.ctex"
+uid="uid://csolujt8g1g6r"
+path="res://.godot/imported/shoes_sandals.png-d482a9d546abab54c4257401edcdd942.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/top_dress.png"
-dest_files=["res://.godot/imported/top_dress.png-add3284585e75ba9295a40a4d25f6cd2.ctex"]
+source_file="res://assets/shoes/shoes_sandals.png"
+dest_files=["res://.godot/imported/shoes_sandals.png-d482a9d546abab54c4257401edcdd942.ctex"]
 
 [params]
 

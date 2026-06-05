@@ -1,30 +1,30 @@
 {
 	"hair": [
-		{"id": "hair_bob", "name": "Bob Cut", "tex": "res://assets/hair_bob.png"},
-		{"id": "hair_long", "name": "Long Hair", "tex": "res://assets/hair_long.png"},
-		{"id": "hair_ponytail", "name": "Ponytail", "tex": "res://assets/hair_ponytail.png"},
-		{"id": "hair_curly", "name": "Curly", "tex": "res://assets/hair_curly.png"}
+		{"id": "hair_bob", "name": "Bob Cut", "tex": "res://assets/hair/hair_bob.png"},
+		{"id": "hair_long", "name": "Long Hair", "tex": "res://assets/hair/hair_long.png"},
+		{"id": "hair_ponytail", "name": "Ponytail", "tex": "res://assets/hair/hair_ponytail.png"},
+		{"id": "hair_curly", "name": "Curly", "tex": "res://assets/hair/hair_curly.png"}
 	],
 	"top": [
-		{"id": "top_tshirt", "name": "T-Shirt", "tex": "res://assets/top_tshirt.png"},
-		{"id": "top_tank", "name": "Tank Top", "tex": "res://assets/top_tank.png"},
-		{"id": "top_jacket", "name": "Jacket", "tex": "res://assets/top_jacket.png"},
-		{"id": "top_dress", "name": "Dress", "tex": "res://assets/top_dress.png"}
+		{"id": "top_tshirt", "name": "T-Shirt", "tex": "res://assets/top/top_tshirt.png"},
+		{"id": "top_tank", "name": "Tank Top", "tex": "res://assets/top/top_tank.png"},
+		{"id": "top_jacket", "name": "Jacket", "tex": "res://assets/top/top_jacket.png"},
+		{"id": "top_dress", "name": "Dress", "tex": "res://assets/top/top_dress.png"}
 	],
 	"bottom": [
-		{"id": "bottom_shorts", "name": "Shorts", "tex": "res://assets/bottom_shorts.png"},
-		{"id": "bottom_skirt", "name": "Skirt", "tex": "res://assets/bottom_skirt.png"},
-		{"id": "bottom_pants", "name": "Pants", "tex": "res://assets/bottom_pants.png"}
+		{"id": "bottom_shorts", "name": "Shorts", "tex": "res://assets/bottom/bottom_shorts.png"},
+		{"id": "bottom_skirt", "name": "Skirt", "tex": "res://assets/bottom/bottom_skirt.png"},
+		{"id": "bottom_pants", "name": "Pants", "tex": "res://assets/bottom/bottom_pants.png"}
 	],
 	"shoes": [
-		{"id": "shoes_sneakers", "name": "Sneakers", "tex": "res://assets/shoes_sneakers.png"},
-		{"id": "shoes_boots", "name": "Boots", "tex": "res://assets/shoes_boots.png"},
-		{"id": "shoes_sandals", "name": "Sandals", "tex": "res://assets/shoes_sandals.png"}
+		{"id": "shoes_sneakers", "name": "Sneakers", "tex": "res://assets/shoes/shoes_sneakers.png"},
+		{"id": "shoes_boots", "name": "Boots", "tex": "res://assets/shoes/shoes_boots.png"},
+		{"id": "shoes_sandals", "name": "Sandals", "tex": "res://assets/shoes/shoes_sandals.png"}
 	],
 	"accessory": [
-		{"id": "acc_necklace", "name": "Necklace", "tex": "res://assets/acc_necklace.png"},
-		{"id": "acc_glasses", "name": "Glasses", "tex": "res://assets/acc_glasses.png"},
-		{"id": "acc_hat", "name": "Hat", "tex": "res://assets/acc_hat.png"},
-		{"id": "acc_crown", "name": "Crown", "tex": "res://assets/acc_crown.png"}
+		{"id": "acc_necklace", "name": "Necklace", "tex": "res://assets/accessory/acc_necklace.png"},
+		{"id": "acc_glasses", "name": "Glasses", "tex": "res://assets/accessory/acc_glasses.png"},
+		{"id": "acc_hat", "name": "Hat", "tex": "res://assets/accessory/acc_hat.png"},
+		{"id": "acc_crown", "name": "Crown", "tex": "res://assets/accessory/acc_crown.png"}
 	]
 }

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bweoy0747cbus"
-path="res://.godot/imported/hair_bob.png-0e50697b0362f0178845044f4906d9e3.ctex"
+uid="uid://dbqhdxrr3lxty"
+path="res://.godot/imported/acc_hat.png-a7e22e136c1dd3e16bbb9366f8736596.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hair_bob.png"
-dest_files=["res://.godot/imported/hair_bob.png-0e50697b0362f0178845044f4906d9e3.ctex"]
+source_file="res://assets/accessory/acc_hat.png"
+dest_files=["res://.godot/imported/acc_hat.png-a7e22e136c1dd3e16bbb9366f8736596.ctex"]
 
 [params]
 

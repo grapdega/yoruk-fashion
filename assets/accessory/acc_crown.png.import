@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://emk8rkqi6n4"
-path="res://.godot/imported/acc_necklace.png-459f30f599f579d37081df91d7a96e48.ctex"
+uid="uid://dt3qeqddnmvyb"
+path="res://.godot/imported/acc_crown.png-58d2af9073dd826355e37bb9a495db61.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/acc_necklace.png"
-dest_files=["res://.godot/imported/acc_necklace.png-459f30f599f579d37081df91d7a96e48.ctex"]
+source_file="res://assets/accessory/acc_crown.png"
+dest_files=["res://.godot/imported/acc_crown.png-58d2af9073dd826355e37bb9a495db61.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ch3bd5k4rp48g"
-path="res://.godot/imported/shoes_sneakers.png-12e661329e838426c540e71fc243b216.ctex"
+uid="uid://cx0jxg18n100y"
+path="res://.godot/imported/hair_curly.png-4c10d05bc17b55c6856f1d75511036f0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/shoes_sneakers.png"
-dest_files=["res://.godot/imported/shoes_sneakers.png-12e661329e838426c540e71fc243b216.ctex"]
+source_file="res://assets/hair/hair_curly.png"
+dest_files=["res://.godot/imported/hair_curly.png-4c10d05bc17b55c6856f1d75511036f0.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coy3s1f11qdtf"
-path="res://.godot/imported/acc_crown.png-66dde1323bb955fac9d72fa3ebc3f4d5.ctex"
+uid="uid://n6yn761afv"
+path="res://.godot/imported/shoes_sneakers.png-a576b470bdc873b9459269f53ae5fb42.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/acc_crown.png"
-dest_files=["res://.godot/imported/acc_crown.png-66dde1323bb955fac9d72fa3ebc3f4d5.ctex"]
+source_file="res://assets/shoes/shoes_sneakers.png"
+dest_files=["res://.godot/imported/shoes_sneakers.png-a576b470bdc873b9459269f53ae5fb42.ctex"]
 
 [params]
 

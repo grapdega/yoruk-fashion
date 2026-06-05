@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfu4hhx74fqau"
-path="res://.godot/imported/bottom_pants.png-353cc9b2af799789ef4dc2fcd70809da.ctex"
+uid="uid://cagchxj1n5dkf"
+path="res://.godot/imported/shoes_boots.png-7a088d029f9ca8e7cd0e276c9c3fa1db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/bottom_pants.png"
-dest_files=["res://.godot/imported/bottom_pants.png-353cc9b2af799789ef4dc2fcd70809da.ctex"]
+source_file="res://assets/shoes/shoes_boots.png"
+dest_files=["res://.godot/imported/shoes_boots.png-7a088d029f9ca8e7cd0e276c9c3fa1db.ctex"]
 
 [params]
 

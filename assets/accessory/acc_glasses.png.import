@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjw7foa1eai5i"
-path="res://.godot/imported/top_jacket.png-8333de638214492a0a1a51915a9d9147.ctex"
+uid="uid://mpqsahhbud56"
+path="res://.godot/imported/acc_glasses.png-f3cba6b883701c1659d55b633ca0198a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/top_jacket.png"
-dest_files=["res://.godot/imported/top_jacket.png-8333de638214492a0a1a51915a9d9147.ctex"]
+source_file="res://assets/accessory/acc_glasses.png"
+dest_files=["res://.godot/imported/acc_glasses.png-f3cba6b883701c1659d55b633ca0198a.ctex"]
 
 [params]
 

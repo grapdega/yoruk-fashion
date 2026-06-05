@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ffwfe3rkp38a"
-path="res://.godot/imported/shoes_sandals.png-90cedc143edaf66858731f87419b6196.ctex"
+uid="uid://ckspdjhmvjdbe"
+path="res://.godot/imported/hair_ponytail.png-34d997bba075020145775e820238ba8d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/shoes_sandals.png"
-dest_files=["res://.godot/imported/shoes_sandals.png-90cedc143edaf66858731f87419b6196.ctex"]
+source_file="res://assets/hair/hair_ponytail.png"
+dest_files=["res://.godot/imported/hair_ponytail.png-34d997bba075020145775e820238ba8d.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj1gowc81pklv"
-path="res://.godot/imported/acc_hat.png-9d969b56d045f9a38395a6e5dd7bf46c.ctex"
+uid="uid://cg31pot717x63"
+path="res://.godot/imported/bottom_pants.png-79cfa5d07f733e3846809db419399a72.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/acc_hat.png"
-dest_files=["res://.godot/imported/acc_hat.png-9d969b56d045f9a38395a6e5dd7bf46c.ctex"]
+source_file="res://assets/bottom/bottom_pants.png"
+dest_files=["res://.godot/imported/bottom_pants.png-79cfa5d07f733e3846809db419399a72.ctex"]
 
 [params]
 
