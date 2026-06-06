@@ -141,6 +141,16 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Remove"
 
+[node name="RandomizeBtn" type="Button" parent="." unique_id=1657293802]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 1730.0
+offset_right = -116.0
+offset_bottom = 36.0
+grow_horizontal = 2
+text = "Randomize"
+
 [node name="ExitBtn" type="Button" parent="." unique_id=1657293801]
 layout_mode = 1
 anchors_preset = 10

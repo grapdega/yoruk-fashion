@@ -6,6 +6,7 @@ const ITEMS_PER_PAGE := 9
 @onready var item_grid: GridContainer = $UI/Margin/VBox/ItemGrid
 @onready var cat_buttons: HBoxContainer = $UI/Margin/VBox/CategoryButtons
 @onready var remove_btn: Button = $UI/Margin/VBox/RemoveBtn
+@onready var randomize_btn: Button = $RandomizeBtn
 @onready var exit_btn: Button = $ExitBtn
 @onready var category_label: Label = $UI/Margin/VBox/CategoryLabel
 @onready var prev_btn: Button = $UI/Margin/VBox/PageNav/PrevBtn
@@ -22,6 +23,7 @@ func _ready() -> void:
 	build_category_buttons()
 	select_category("top")
 	remove_btn.pressed.connect(_on_remove_pressed)
+	randomize_btn.pressed.connect(_on_randomize_pressed)
 	exit_btn.pressed.connect(_on_exit_pressed)
 	prev_btn.pressed.connect(_on_prev_page)
 	next_btn.pressed.connect(_on_next_page)
@@ -145,6 +147,16 @@ func _on_item_pressed(item: Dictionary) -> void:
 		char_display.unequip(current_category)
 	else:
 		char_display.equip(current_category, item)
+	refresh_items()
+
+func _on_randomize_pressed() -> void:
+	var cats = char_display.get_categories()
+	for cat in cats:
+		var items = char_display.get_items(cat)
+		if items.is_empty():
+			continue
+		var item = items[randi() % items.size()]
+		char_display.equip(cat, item)
 	refresh_items()
 
 func _on_exit_pressed() -> void:
