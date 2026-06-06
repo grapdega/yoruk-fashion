@@ -1,34 +1,32 @@
 {
 	"hair": [
-		{"id": "hair_turban", "name": "Turban", "tex": "res://assets/hair/hair_turban.png"},
-		{"id": "hair_fes", "name": "Fes", "tex": "res://assets/hair/hair_fes.png"},
-		{"id": "hair_hotoz", "name": "Hotoz", "tex": "res://assets/hair/hair_hotoz.png"},
-		{"id": "hair_tac", "name": "Tac", "tex": "res://assets/hair/hair_tac.png"}
+		{"id": "hair1", "name": "Hair 1", "tex": "res://assets/famale/hair/hair1.png"},
+		{"id": "hair2", "name": "Hair 2", "tex": "res://assets/famale/hair/hair2.png"},
+		{"id": "hair3", "name": "Hair 3", "tex": "res://assets/famale/hair/hair3.png"}
 	],
 	"top": [
-		{"id": "top_kaftan", "name": "Kaftan", "tex": "res://assets/top/top_kaftan.png"},
-		{"id": "top_yelek", "name": "Yelek", "tex": "res://assets/top/top_yelek.png"},
-		{"id": "top_bindalli", "name": "Bindalli", "tex": "res://assets/top/top_bindalli.png"},
-		{"id": "top_gomlek", "name": "Gomlek", "tex": "res://assets/top/top_gomlek.png"}
+		{"id": "top1", "name": "Top 1", "tex": "res://assets/famale/top/top1.png"},
+		{"id": "top2", "name": "Top 2", "tex": "res://assets/famale/top/top2.png"},
+		{"id": "top3", "name": "Top 3", "tex": "res://assets/famale/top/top3.png"},
+		{"id": "top4", "name": "Top 4", "tex": "res://assets/famale/top/top4.png"}
 	],
 	"bottom": [
-		{"id": "bottom_salvar", "name": "Salvar", "tex": "res://assets/bottom/bottom_salvar.png"},
-		{"id": "bottom_etek", "name": "Etek", "tex": "res://assets/bottom/bottom_etek.png"},
-		{"id": "bottom_salvar_kisa", "name": "Kisa Salvar", "tex": "res://assets/bottom/bottom_salvar_kisa.png"}
+		{"id": "bottom1", "name": "Bottom 1", "tex": "res://assets/famale/bottom/bottom1.png"},
+		{"id": "bottom2", "name": "Bottom 2", "tex": "res://assets/famale/bottom/bottom2.png"},
+		{"id": "bottom3", "name": "Bottom 3", "tex": "res://assets/famale/bottom/bottom3.png"},
+		{"id": "bottom4", "name": "Bottom 4", "tex": "res://assets/famale/bottom/bottom4.png"}
 	],
 	"shoes": [
-		{"id": "shoes_cizme", "name": "Cizme", "tex": "res://assets/shoes/shoes_cizme.png"},
-		{"id": "shoes_babuc", "name": "Babuc", "tex": "res://assets/shoes/shoes_babuc.png"},
-		{"id": "shoes_takunya", "name": "Takunya", "tex": "res://assets/shoes/shoes_takunya.png"}
+		{"id": "shoes1", "name": "Shoes 1", "tex": "res://assets/famale/shoes/shoes1.png"},
+		{"id": "shoes2", "name": "Shoes 2", "tex": "res://assets/famale/shoes/shoes2.png"},
+		{"id": "shoes3", "name": "Shoes 3", "tex": "res://assets/famale/shoes/shoes3.png"},
+		{"id": "shoes4", "name": "Shoes 4", "tex": "res://assets/famale/shoes/shoes4.png"}
 	],
 	"accessory": [
-		{"id": "acc_necklace", "name": "Necklace", "tex": "res://assets/accessory/acc_necklace.png"},
-		{"id": "acc_glasses", "name": "Glasses", "tex": "res://assets/accessory/acc_glasses.png"},
-		{"id": "acc_hat", "name": "Hat", "tex": "res://assets/accessory/acc_hat.png"},
-		{"id": "acc_crown", "name": "Crown", "tex": "res://assets/accessory/acc_crown.png"},
-		{"id": "acc_kolye", "name": "Kolye", "tex": "res://assets/accessory/acc_kolye.png"},
-		{"id": "acc_kupe", "name": "Kupe", "tex": "res://assets/accessory/acc_kupe.png"},
-		{"id": "acc_bilezik", "name": "Bilezik", "tex": "res://assets/accessory/acc_bilezik.png"},
-		{"id": "acc_kusak", "name": "Kusak", "tex": "res://assets/accessory/acc_kusak.png"}
+		{"id": "accessory1", "name": "Accessory 1", "tex": "res://assets/famale/accessory/accessory1.png"},
+		{"id": "accessory2", "name": "Accessory 2", "tex": "res://assets/famale/accessory/accessory2.png"},
+		{"id": "accessory3", "name": "Accessory 3", "tex": "res://assets/famale/accessory/accessory3.png"},
+		{"id": "accessory4", "name": "Accessory 4", "tex": "res://assets/famale/accessory/accessory4.png"},
+		{"id": "accessory5", "name": "Accessory 5", "tex": "res://assets/famale/accessory/accessory5.png"}
 	]
 }
