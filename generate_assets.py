@@ -1,536 +1,407 @@
-#!/usr/bin/env python3
-"""High-quality Turkic traditional clothing assets at 1024x1024."""
 from PIL import Image, ImageDraw
-import math
+import os
 
-W, H = 1024, 1024
-GOLD = (255, 215, 0)
-DARK_GOLD = (200, 170, 0)
+SIZE = 1024
 
-def embroider(d, points, color=GOLD, spacing=18, dot_r=3):
-    """Add embroidery dots along a path."""
-    for i in range(0, len(points) - 1):
-        p1, p2 = points[i], points[i + 1]
-        dx = p2[0] - p1[0]
-        dy = p2[1] - p1[1]
-        dist = math.hypot(dx, dy)
-        steps = max(2, int(dist / spacing))
-        for s in range(steps):
-            t = s / steps
-            x = p1[0] + dx * t
-            y = p1[1] + dy * t
-            d.ellipse([x-dot_r, y-dot_r, x+dot_r, y+dot_r], color)
+OUT_DIR = "assets"
+SUBDIRS = ["hair", "top", "bottom", "shoes", "accessory"]
 
-def draw_pattern(d, x, y, w, h, color, size=12):
-    """Draw a repeating diamond pattern."""
-    for py in range(y, y + h, size * 2):
-        for px in range(x, x + w, size * 2):
-            cx, cy = px + size // 2, py + size // 2
-            d.polygon([(cx, cy-size//2), (cx+size//2, cy), (cx, cy+size//2), (cx-size//2, cy)], color)
+def create_img():
+    img = Image.new("RGBA", (SIZE, SIZE), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+    return img, draw
 
-def base_body():
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    skin = (242, 210, 192)
-    shadow = (215, 185, 168)
-    cx = W // 2
+def save(img, path):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    img.save(path, "PNG")
+
+def rr(draw, x1, y1, x2, y2, fill, outline=None, width=2, radius=8):
+    draw.rounded_rectangle([x1, y1, x2, y2], radius=radius, fill=fill, outline=outline, width=width)
+
+def ell(draw, x1, y1, x2, y2, fill, outline=None, width=2):
+    draw.ellipse([x1, y1, x2, y2], fill=fill, outline=outline, width=width)
+
+def poly(draw, pts, fill, outline=None, width=2):
+    draw.polygon(pts, fill=fill, outline=outline, width=width)
+
+# Colors
+CRIMSON    = (180, 30, 40)
+DARK_RED   = (140, 20, 30)
+GOLD       = (212, 175, 55)
+DARK_GOLD  = (180, 140, 30)
+TURQUOISE  = (60, 180, 180)
+DARK_TEAL  = (30, 100, 120)
+NAVY       = (25, 40, 70)
+DARK_GREEN = (40, 100, 60)
+FOREST     = (30, 80, 50)
+PURPLE     = (120, 60, 140)
+BROWN      = (120, 70, 40)
+DARK_BROWN = (80, 45, 25)
+BEIGE      = (245, 225, 200)
+SKIN       = (235, 190, 150)
+SKIN_DARK  = (200, 155, 120)
+WHITE      = (245, 245, 240)
+BLACK      = (30, 30, 30)
+GRAY       = (180, 180, 180)
+DARK_GRAY  = (100, 100, 100)
+
+# ─── BASE BODIES ───
+
+def gen_base_body_female():
+    img, draw = create_img()
+    cx = 512  # center x
 
     # Legs
-    d.rounded_rectangle([440, 380, 498, 480], 12, skin)
-    d.rounded_rectangle([526, 380, 584, 480], 12, skin)
-    d.rounded_rectangle([430, 480, 508, 500], 8, shadow)
-    d.rounded_rectangle([516, 480, 594, 500], 8, shadow)
+    rr(draw, cx-80, 560, cx-30, 880, fill=SKIN, outline=(180,140,110), radius=14)
+    rr(draw, cx+30, 560, cx+80, 880, fill=SKIN, outline=(180,140,110), radius=14)
+
+    # Skirt
+    poly(draw, [
+        (cx-110, 560), (cx+110, 560), (cx+140, 880), (cx-140, 880)
+    ], fill=(200, 50, 70), outline=(160, 30, 50))
+
+    # Torso
+    rr(draw, cx-90, 230, cx+90, 570, fill=(240, 220, 230), outline=(200, 180, 190), radius=16)
 
     # Arms
-    for rx in (385, 609):
-        d.rounded_rectangle([rx, 232, rx + 30, 370], 10, skin)
-        # Hand
-        d.rounded_rectangle([rx + 2, 365, rx + 28, 390], 6, skin)
-
-    # Body
-    d.rounded_rectangle([420, 228, 604, 385], 14, skin)
-    d.rounded_rectangle([422, 230, 602, 383], 14, outline=shadow, width=2)
+    rr(draw, cx-130, 260, cx-92, 530, fill=SKIN, outline=(180,140,110), radius=12)
+    rr(draw, cx+92, 260, cx+130, 530, fill=SKIN, outline=(180,140,110), radius=12)
 
     # Neck
-    d.rectangle([482, 195, 542, 230], skin)
+    rr(draw, cx-18, 190, cx+18, 240, fill=SKIN, outline=(180,140,110), radius=6)
 
     # Head
-    d.ellipse([432, 55, 592, 225], skin)
-    d.ellipse([432, 56, 592, 226], outline=shadow, width=2)
+    ell(draw, cx-75, 50, cx+75, 200, fill=SKIN, outline=(180,140,110))
 
-    # Eyes
-    for ex in (480, 536):
-        d.ellipse([ex, 126, ex + 18, 144], (55, 45, 35))
-        d.ellipse([ex + 3, 130, ex + 10, 137], (255, 255, 255))
+    # Hair
+    ell(draw, cx-85, 40, cx+85, 140, fill=(60, 30, 15))
 
-    # Eyebrows
-    d.arc([478, 116, 500, 130], 180, 360, (80, 65, 50), 3)
-    d.arc([524, 116, 546, 130], 180, 360, (80, 65, 50), 3)
+    # Shoes
+    rr(draw, cx-85, 875, cx-25, 910, fill=DARK_RED, outline=(100,10,20), radius=6)
+    rr(draw, cx+25, 875, cx+85, 910, fill=DARK_RED, outline=(100,10,20), radius=6)
 
-    # Mouth
-    d.arc([498, 162, 526, 176], 10, 170, (195, 115, 115), 3)
+    # Face features
+    ell(draw, cx-20, 105, cx-8, 118, fill=(60, 30, 15))
+    ell(draw, cx+8, 105, cx+20, 118, fill=(60, 30, 15))
+    draw.arc([cx-40, 120, cx+40, 150], start=0, end=180, fill=(180, 100, 100), width=3)
 
-    # Blush
-    d.ellipse([455, 148, 472, 165], (235, 195, 190, 80))
-    d.ellipse([552, 148, 569, 165], (235, 195, 190, 80))
+    save(img, os.path.join(OUT_DIR, "base_body.png"))
 
-    img.save("assets/base_body.png")
+def gen_base_body_male():
+    img, draw = create_img()
+    cx = 512
 
-def head_turban():
-    """Traditional white turban with gold trim."""
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    cx = W // 2
-    # Turban wraps
-    d.ellipse([410, 20, 614, 170], (235, 225, 210))
-    d.ellipse([420, 30, 604, 160], (245, 238, 225))
-    # Wrap folds
-    for wy in range(50, 120, 20):
-        d.arc([422, wy, 602, wy + 40], 0, 180, (220, 210, 195), 2)
-    # Gold band
-    d.ellipse([412, 115, 612, 135], GOLD)
-    d.ellipse([412, 118, 612, 132], DARK_GOLD)
-    # Jewel on front
-    d.ellipse([502, 110, 522, 130], (220, 30, 30))
-    d.ellipse([506, 114, 518, 126], (255, 80, 80))
-    img.save("assets/hair/hair_turban.png")
+    # Legs
+    rr(draw, cx-90, 560, cx-30, 880, fill=SKIN_DARK, outline=(150,110,80), radius=14)
+    rr(draw, cx+30, 560, cx+90, 880, fill=SKIN_DARK, outline=(150,110,80), radius=14)
 
-def head_fes():
-    """Red fez with gold tassel."""
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    cx = W // 2
-    # Fez body
-    d.rounded_rectangle([464, 25, 560, 140], 18, (180, 30, 30))
-    d.rounded_rectangle([466, 27, 558, 138], 16, (200, 40, 40))
-    # Gold band
-    d.rounded_rectangle([462, 115, 562, 130], 6, GOLD)
-    d.rounded_rectangle([464, 117, 560, 128], 4, DARK_GOLD)
-    # Tassel
-    d.line([512, 130, 512, 190], GOLD, 3)
-    d.ellipse([506, 185, 518, 200], GOLD)
-    # Top
-    d.ellipse([464, 20, 560, 40], (190, 35, 35))
-    img.save("assets/hair/hair_fes.png")
+    # Pants
+    rr(draw, cx-105, 560, cx-20, 720, fill=(80, 60, 50), outline=(60, 40, 30), radius=12)
+    rr(draw, cx+20, 560, cx+105, 720, fill=(80, 60, 50), outline=(60, 40, 30), radius=12)
+    rr(draw, cx-105, 700, cx+105, 740, fill=(80, 60, 50), outline=(60, 40, 30), radius=4)
 
-def head_hotoz():
-    """Traditional women's headdress with gold embroidery."""
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    cx = W // 2
-    # Main headdress
-    d.ellipse([400, 10, 624, 180], (120, 20, 60))
-    d.ellipse([408, 18, 616, 170], (140, 25, 70))
-    # Gold embroidery border
-    d.ellipse([410, 16, 614, 172], outline=GOLD, width=3)
-    # Pattern
-    for px in range(440, 584, 30):
-        d.ellipse([px-3, 60, px+3, 66], GOLD)
-        d.ellipse([px-3, 80, px+3, 86], GOLD)
-        d.ellipse([px-3, 100, px+3, 106], GOLD)
-    # Side ornaments
-    for sx in (420, 604):
-        d.ellipse([sx-8, 70, sx+8, 100], GOLD)
-        d.line([sx, 100, sx, 135], GOLD, 2)
-        d.ellipse([sx-4, 130, sx+4, 142], GOLD)
-    img.save("assets/hair/hair_hotoz.png")
+    # Torso
+    rr(draw, cx-95, 230, cx+95, 570, fill=(220, 215, 210), outline=(180, 175, 170), radius=16)
 
-def head_tac():
-    """Ornamental crown/tac."""
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    cx = W // 2
-    # Crown base
-    d.rounded_rectangle([474, 50, 550, 120], 8, GOLD)
-    d.rounded_rectangle([476, 52, 548, 118], 6, DARK_GOLD)
-    # Points
-    pts = [(474,120),(474,90),(488,108),(500,80),(512,102),
-           (524,80),(536,108),(550,90),(550,120)]
-    d.polygon(pts, GOLD)
-    d.polygon(pts, outline=DARK_GOLD, width=2)
-    # Jewels
-    for jx in (488, 512, 536):
-        d.ellipse([jx-5, 70, jx+5, 80], (220, 30, 30))
-    # Center jewel large
-    d.ellipse([506, 62, 518, 78], (30, 100, 220))
-    d.ellipse([509, 65, 515, 75], (100, 170, 255))
-    img.save("assets/hair/hair_tac.png")
+    # Arms
+    rr(draw, cx-135, 250, cx-97, 530, fill=SKIN_DARK, outline=(150,110,80), radius=12)
+    rr(draw, cx+97, 250, cx+135, 530, fill=SKIN_DARK, outline=(150,110,80), radius=12)
 
-def top_kaftan():
-    """Long traditional kaftan with rich pattern."""
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    cx = W // 2
-    # Main kaftan body
-    d.rounded_rectangle([405, 215, 619, 400], 18, (140, 30, 50))
-    d.rounded_rectangle([408, 218, 616, 397], 16, (160, 35, 55))
-    # V-neck opening
-    d.polygon([(482,218),(512,300),(542,218)], (242, 210, 192))
-    d.polygon([(484,220),(512,298),(540,220)], (222, 190, 175), width=2)
-    # Gold trim along V-neck
-    d.line([482, 218, 512, 300], GOLD, 3)
-    d.line([542, 218, 512, 300], GOLD, 3)
-    # Sleeves
-    d.rounded_rectangle([378, 230, 408, 370], 10, (140, 30, 50))
-    d.rounded_rectangle([616, 230, 646, 370], 10, (140, 30, 50))
-    # Sleeve trim
-    d.line([378, 230, 378, 370], GOLD, 3)
-    d.line([646, 230, 646, 370], GOLD, 3)
-    # Belt/sash
-    d.rounded_rectangle([418, 360, 606, 385], 6, (30, 100, 160))
-    d.line([418, 370, 606, 370], GOLD, 3)
-    # Embroidery pattern on body
-    for px in range(430, 594, 35):
-        d.ellipse([px-2, 250, px+2, 254], GOLD)
-        d.ellipse([px-2, 290, px+2, 294], GOLD)
-        d.ellipse([px-2, 330, px+2, 334], GOLD)
-    # Gold border at bottom
-    d.line([405, 398, 619, 398], GOLD, 4)
-    img.save("assets/top/top_kaftan.png")
+    # Neck
+    rr(draw, cx-18, 190, cx+18, 240, fill=SKIN_DARK, outline=(150,110,80), radius=6)
 
-def top_yelek():
-    """Embroidered velvet vest."""
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    cx = W // 2
-    # Vest body
-    d.rounded_rectangle([412, 215, 612, 395], 14, (30, 60, 120))
-    d.rounded_rectangle([415, 218, 609, 392], 12, (35, 70, 135))
-    # V-neck
-    d.polygon([(480,218),(512,270),(544,218)], (242, 210, 192))
-    # Gold embroidery along edges
-    d.line([410, 218, 410, 395], GOLD, 2)
-    d.line([614, 218, 614, 395], GOLD, 2)
-    d.line([480, 218, 512, 270], GOLD, 2)
-    d.line([544, 218, 512, 270], GOLD, 2)
-    # Diamond pattern on vest
-    draw_pattern(d, 425, 270, 175, 100, GOLD, 10)
-    # Bottom gold trim
-    d.rounded_rectangle([410, 380, 614, 395], 6, GOLD)
-    img.save("assets/top/top_yelek.png")
+    # Head
+    ell(draw, cx-75, 45, cx+75, 195, fill=SKIN_DARK, outline=(150,110,80))
 
-def top_bindalli():
-    """Gold-embroidered velvet dress."""
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    cx = W // 2
-    # Dress top
-    d.rounded_rectangle([410, 215, 614, 370], 14, (90, 20, 45))
-    d.rounded_rectangle([413, 218, 611, 367], 12, (105, 25, 50))
-    # Flowing skirt
-    d.polygon([(410,370),(614,370),(658,480),(366,480)], (105, 25, 50))
-    d.polygon([(413,370),(611,370),(652,477),(372,477)], (120, 30, 55))
-    # Gold embroidery on bodice
-    for px in range(440, 584, 25):
-        for py in range(250, 350, 30):
-            d.ellipse([px-2, py-2, px+2, py+2], GOLD)
-    # Gold trim at neckline
-    d.arc([480, 215, 544, 240], 180, 360, GOLD, 3)
-    # Gold belt line
-    d.line([410, 370, 614, 370], GOLD, 3)
-    # Hem embroidery
-    embroider(d, [(366,480),(512,498),(658,480)], GOLD, 12, 4)
-    # Sleeves
-    for rx in (380, 634):
-        d.rounded_rectangle([rx, 232, rx+28, 310], 8, (90, 20, 45))
-        d.line([rx, 310, rx+28, 310], GOLD, 2)
-    img.save("assets/top/top_bindalli.png")
+    # Hair (short)
+    ell(draw, cx-80, 35, cx+80, 130, fill=(40, 25, 10))
 
-def top_gomlek():
-    """Traditional shirt with embroidered details."""
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    cx = W // 2
-    # Shirt
-    d.rounded_rectangle([415, 218, 609, 385], 12, (230, 220, 210))
-    d.rounded_rectangle([418, 221, 606, 382], 10, (245, 238, 228))
-    # Collar opening
-    d.polygon([(492,218),(512,280),(532,218)], (242, 210, 192))
-    # Collar embroidery
-    d.line([492, 218, 512, 280], (180, 50, 60), 2)
-    d.line([532, 218, 512, 280], (180, 50, 60), 2)
-    # Cuff embroidery
-    for rx in (415, 605):
-        d.line([rx, 360, rx+10, 360], (180, 50, 60), 2)
-        d.line([rx, 370, rx+10, 370], (180, 50, 60), 2)
-    # Front embroidery
-    for px in range(440, 584, 30):
-        d.ellipse([px-1, 300, px+1, 304], (180, 50, 60))
-    img.save("assets/top/top_gomlek.png")
+    # Shoes
+    rr(draw, cx-90, 875, cx-25, 915, fill=(50, 40, 35), outline=(30, 20, 15), radius=6)
+    rr(draw, cx+25, 875, cx+90, 915, fill=(50, 40, 35), outline=(30, 20, 15), radius=6)
 
-def bottom_salvar():
-    """Traditional baggy shalwar pants."""
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    cx = W // 2
-    # Baggy legs
-    d.rounded_rectangle([400, 375, 520, 480], 14, (40, 40, 80))
-    d.rounded_rectangle([504, 375, 624, 480], 14, (40, 40, 80))
-    # Gather at ankles
-    d.rounded_rectangle([435, 470, 500, 488], 6, (50, 50, 95))
-    d.rounded_rectangle([524, 470, 589, 488], 6, (50, 50, 95))
-    # Ankle embroidery
-    d.line([435, 486, 500, 486], GOLD, 3)
-    d.line([524, 486, 589, 486], GOLD, 3)
-    # Waistband
-    d.rounded_rectangle([430, 372, 594, 385], 4, (60, 60, 110))
-    d.line([430, 378, 594, 378], GOLD, 2)
-    img.save("assets/bottom/bottom_salvar.png")
+    # Face
+    ell(draw, cx-22, 100, cx-10, 113, fill=(40, 25, 10))
+    ell(draw, cx+10, 100, cx+22, 113, fill=(40, 25, 10))
+    draw.arc([cx-35, 115, cx+35, 145], start=0, end=180, fill=(140, 80, 80), width=3)
 
-def bottom_etek():
-    """Traditional patterned skirt."""
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    cx = W // 2
-    # Skirt - flared
-    d.polygon([(414,376),(610,376),(570,490),(454,490)], (60, 120, 70))
-    d.polygon([(418,378),(606,378),(567,488),(457,488)], (70, 135, 80))
-    # Pattern stripes
-    for px in range(440, 584, 24):
-        d.line([px, 376, px-8, 490], (90, 155, 100), 2)
-    # Waistband
-    d.rounded_rectangle([430, 373, 594, 382], 4, GOLD)
-    # Hem embroidery
-    embroider(d, [(454,490),(512,496),(570,490)], GOLD, 10, 3)
-    img.save("assets/bottom/bottom_etek.png")
+    save(img, os.path.join(OUT_DIR, "base_body_male.png"))
 
-def bottom_salvar_kisa():
-    """Short shalwar (bloomers)."""
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    cx = W // 2
-    # Puff legs
-    d.rounded_rectangle([420, 376, 508, 430], 12, (160, 60, 60))
-    d.rounded_rectangle([516, 376, 604, 430], 12, (160, 60, 60))
-    # Hem at knee
-    d.rounded_rectangle([422, 420, 506, 434], 6, (140, 50, 50))
-    d.rounded_rectangle([518, 420, 602, 434], 6, (140, 50, 50))
-    # Gold trim
-    d.line([422, 432, 506, 432], GOLD, 2)
-    d.line([518, 432, 602, 432], GOLD, 2)
-    # Waist
-    d.rounded_rectangle([430, 372, 594, 382], 4, (100, 35, 35))
-    img.save("assets/bottom/bottom_salvar_kisa.png")
 
-def shoes_cizme():
-    """Traditional leather boots."""
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    cx = W // 2
-    # Boot shafts
-    d.rounded_rectangle([434, 454, 502, 486], 8, (80, 50, 40))
-    d.rounded_rectangle([522, 454, 590, 486], 8, (80, 50, 40))
-    # Boot feet
-    d.rounded_rectangle([428, 484, 508, 508], 10, (90, 55, 45))
-    d.rounded_rectangle([516, 484, 596, 508], 10, (90, 55, 45))
-    # Top trim
-    d.rounded_rectangle([432, 452, 504, 462], 4, (180, 150, 100))
-    d.rounded_rectangle([520, 452, 592, 462], 4, (180, 150, 100))
-    # Sole
-    d.rounded_rectangle([428, 504, 508, 510], 2, (40, 25, 20))
-    d.rounded_rectangle([516, 504, 596, 510], 2, (40, 25, 20))
-    img.save("assets/shoes/shoes_cizme.png")
+# ─── HAIR ───
 
-def shoes_babuc():
-    """Traditional curved slippers."""
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    cx = W // 2
-    # Slipper body
-    d.rounded_rectangle([430, 486, 508, 504], 8, (180, 50, 70))
-    d.rounded_rectangle([516, 486, 594, 504], 8, (180, 50, 70))
-    # Curved toe
-    d.ellipse([428, 483, 508, 500], (180, 50, 70))
-    d.ellipse([516, 483, 596, 500], (180, 50, 70))
-    # Gold decoration
-    d.ellipse([455, 488, 470, 498], GOLD)
-    d.ellipse([554, 488, 569, 498], GOLD)
-    img.save("assets/shoes/shoes_babuc.png")
+def gen_hair_turban():
+    img, draw = create_img()
+    cx = 512
+    rr(draw, cx-100, 35, cx+100, 160, fill=(60, 120, 130), outline=(40, 90, 100), radius=20)
+    for i in range(4):
+        yy = 50 + i * 28
+        draw.line([cx-80, yy, cx+80, yy], fill=(50, 100, 110), width=4)
+    ell(draw, cx-22, 20, cx+22, 45, fill=GOLD, outline=(160, 130, 30))
+    save(img, os.path.join(OUT_DIR, "hair", "hair_turban.png"))
 
-def shoes_takunya():
-    """Traditional sandals."""
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    cx = W // 2
-    # Sole
-    d.rounded_rectangle([428, 488, 510, 504], 6, (120, 80, 50))
-    d.rounded_rectangle([514, 488, 596, 504], 6, (120, 80, 50))
-    # Leather straps
-    d.line([440, 488, 470, 488], (160, 110, 70), 4)
-    d.line([440, 496, 470, 496], (160, 110, 70), 4)
-    d.line([470, 488, 470, 504], (160, 110, 70), 4)
-    d.line([470, 488, 440, 504], (160, 110, 70), 4)
-    d.line([554, 488, 584, 488], (160, 110, 70), 4)
-    d.line([554, 496, 584, 496], (160, 110, 70), 4)
-    d.line([554, 488, 554, 504], (160, 110, 70), 4)
-    d.line([584, 488, 554, 504], (160, 110, 70), 4)
-    img.save("assets/shoes/shoes_takunya.png")
+def gen_hair_fes():
+    img, draw = create_img()
+    cx = 512
+    rr(draw, cx-80, 30, cx+80, 180, fill=CRIMSON, outline=DARK_RED, radius=14)
+    tx, ty = cx, 175
+    draw.line([tx, ty, tx+8, ty+50], fill=(60, 30, 15), width=4)
+    ell(draw, tx+1, ty+45, tx+15, ty+65, fill=(60, 30, 15))
+    rr(draw, cx-80, 160, cx+80, 180, fill=GOLD, outline=DARK_GOLD, radius=4)
+    save(img, os.path.join(OUT_DIR, "hair", "hair_fes.png"))
 
-def acc_kusak():
-    """Embroidered sash/belt."""
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    cx = W // 2
-    # Sash
-    d.rounded_rectangle([410, 358, 614, 388], 10, (200, 50, 70))
-    d.rounded_rectangle([410, 368, 614, 382], 8, (220, 60, 80))
-    # Gold embroidery band
-    d.rounded_rectangle([410, 362, 614, 372], 4, GOLD)
-    # Pattern
-    for px in range(420, 604, 20):
-        d.ellipse([px-2, 364, px+2, 368], DARK_GOLD)
-    # Buckle/center ornament
-    d.ellipse([506, 360, 518, 375], GOLD)
-    d.ellipse([509, 363, 515, 372], (220, 30, 30))
-    img.save("assets/accessory/acc_kusak.png")
+def gen_hair_hotoz():
+    img, draw = create_img()
+    cx = 512
+    poly(draw, [
+        (cx-90, 180), (cx-60, 20), (cx+60, 20), (cx+90, 180)
+    ], fill=PURPLE, outline=(90, 40, 110))
+    rr(draw, cx-90, 150, cx+90, 180, fill=GOLD, outline=DARK_GOLD, radius=6)
+    rr(draw, cx-70, 165, cx+70, 220, fill=(180, 140, 180, 140), outline=None, radius=8)
+    save(img, os.path.join(OUT_DIR, "hair", "hair_hotoz.png"))
 
-def acc_kolye():
-    """Traditional gold coin necklace."""
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    cx = W // 2
-    # Necklace chain
-    d.arc([448, 192, 576, 250], 200, 340, GOLD, 2)
-    # Coins along necklace
-    pos = [(470,216),(490,222),(512,226),(534,222),(554,216)]
-    for px, py in pos:
-        d.ellipse([px-8, py-8, px+8, py+8], GOLD)
-        d.ellipse([px-6, py-6, px+6, py+6], DARK_GOLD)
-        d.ellipse([px-2, py-2, px+2, py+2], GOLD)
-    # Center pendant
-    d.ellipse([504, 228, 520, 248], GOLD)
-    d.ellipse([507, 231, 517, 245], (220, 30, 30))
-    d.ellipse([510, 234, 514, 242], (255, 80, 80))
-    img.save("assets/accessory/acc_kolye.png")
+def gen_hair_tac():
+    img, draw = create_img()
+    cx = 512
+    rr(draw, cx-100, 40, cx+100, 150, fill=GOLD, outline=DARK_GOLD, radius=12)
+    for i in range(7):
+        px = cx - 80 + i * 27
+        poly(draw, [
+            (px-10, 40), (px, 5), (px+10, 40)
+        ], fill=GOLD, outline=DARK_GOLD)
+    for i in range(6):
+        jx = cx - 75 + i * 30
+        ell(draw, jx, 65, jx+18, 88, fill=TURQUOISE, outline=(40, 120, 120))
+    save(img, os.path.join(OUT_DIR, "hair", "hair_tac.png"))
 
-def acc_kupe():
-    """Traditional gold earrings."""
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    cx = W // 2
-    # Earrings
-    for ex in (455, 569):
-        # Hoop
-        d.ellipse([ex-10, 140, ex+10, 170], outline=GOLD, width=3)
-        # Coin drop
-        d.ellipse([ex-6, 168, ex+6, 182], GOLD)
-        d.ellipse([ex-3, 171, ex+3, 179], DARK_GOLD)
-        # Connection
-        d.line([ex, 155, ex, 168], GOLD, 2)
-    img.save("assets/accessory/acc_kupe.png")
 
-def acc_bilezik():
-    """Traditional gold bracelets."""
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    cx = W // 2
-    # Left arm bracelets
-    for by in range(360, 381, 8):
-        d.ellipse([386, by, 412, by+6], outline=GOLD, width=3)
-    # Right arm bracelets
-    for by in range(360, 381, 8):
-        d.ellipse([610, by, 636, by+6], outline=GOLD, width=3)
-    img.save("assets/accessory/acc_bilezik.png")
+# ─── TOPS ───
 
-def base_body_male():
-    """Male base body — broader shoulders, square jaw, no blush."""
-    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    skin = (235, 200, 180)
-    shadow = (205, 175, 158)
-    cx = W // 2
+def gen_top_kaftan():
+    img, draw = create_img()
+    cx = 512
+    rr(draw, cx-130, 220, cx+130, 760, fill=(180, 30, 50), outline=(140, 20, 35), radius=20)
+    rr(draw, cx-120, 740, cx+120, 760, fill=GOLD, outline=DARK_GOLD, radius=4)
+    draw.line([cx, 240, cx, 760], fill=GOLD, width=5)
+    rr(draw, cx-130, 480, cx+130, 510, fill=(40, 30, 80), outline=(25, 15, 55), radius=6)
+    save(img, os.path.join(OUT_DIR, "top", "top_kaftan.png"))
 
-    # Legs (slightly wider stance)
-    d.rounded_rectangle([435, 380, 498, 480], 12, skin)
-    d.rounded_rectangle([526, 380, 589, 480], 12, skin)
-    d.rounded_rectangle([425, 480, 508, 500], 8, shadow)
-    d.rounded_rectangle([516, 480, 599, 500], 8, shadow)
+def gen_top_yelek():
+    img, draw = create_img()
+    cx = 512
+    rr(draw, cx-120, 230, cx+120, 530, fill=(60, 60, 140), outline=(40, 40, 110), radius=16)
+    poly(draw, [
+        (cx-30, 230), (cx+30, 230), (cx, 370)
+    ], fill=(0,0,0,0), outline=(40, 40, 110))
+    for i in range(4):
+        yy = 270 + i * 60
+        draw.line([cx-100, yy, cx+100, yy], fill=GOLD, width=3)
+    save(img, os.path.join(OUT_DIR, "top", "top_yelek.png"))
 
-    # Arms (broader)
-    for rx in (372, 622):
-        d.rounded_rectangle([rx, 225, rx + 34, 370], 10, skin)
-        d.rounded_rectangle([rx + 2, 365, rx + 32, 395], 6, skin)
+def gen_top_bindalli():
+    img, draw = create_img()
+    cx = 512
+    rr(draw, cx-130, 220, cx+130, 760, fill=(50, 120, 110), outline=(35, 90, 85), radius=20)
+    for i in range(6):
+        yy = 250 + i * 40
+        for j in range(5):
+            xx = cx - 90 + j * 45
+            ell(draw, xx, yy, xx+18, yy+18, fill=GOLD)
+    rr(draw, cx-110, 480, cx+110, 510, fill=GOLD, outline=DARK_GOLD, radius=6)
+    save(img, os.path.join(OUT_DIR, "top", "top_bindalli.png"))
 
-    # Body / torso (wider shoulders)
-    d.rounded_rectangle([415, 220, 609, 385], 14, skin)
-    d.rounded_rectangle([417, 222, 607, 383], 14, outline=shadow, width=2)
+def gen_top_gomlek():
+    img, draw = create_img()
+    cx = 512
+    rr(draw, cx-125, 230, cx+125, 540, fill=(240, 238, 235), outline=(200, 198, 195), radius=16)
+    poly(draw, [
+        (cx-35, 230), (cx+35, 230), (cx, 290)
+    ], fill=(240, 238, 235), outline=(200, 198, 195))
+    for i in range(4):
+        ell(draw, cx-4, 300+i*45, cx+4, 310+i*45, fill=(180, 178, 175))
+    save(img, os.path.join(OUT_DIR, "top", "top_gomlek.png"))
 
-    # Neck (wider)
-    d.rectangle([478, 190, 546, 222], skin)
 
-    # Head — slightly squarer jaw
-    d.ellipse([432, 55, 592, 225], skin)
-    # Jaw line
-    d.rounded_rectangle([437, 168, 587, 225], 10, skin)
-    d.ellipse([432, 56, 592, 226], outline=shadow, width=2)
+# ─── BOTTOMS ───
 
-    # Eyes (slightly narrower)
-    for ex in (480, 536):
-        d.ellipse([ex, 126, ex + 16, 142], (55, 45, 35))
-        d.ellipse([ex + 3, 130, ex + 8, 136], (255, 255, 255))
+def gen_bottom_salvar():
+    img, draw = create_img()
+    cx = 512
+    rr(draw, cx-120, 550, cx+120, 780, fill=(80, 50, 70), outline=(60, 35, 55), radius=16)
+    rr(draw, cx-120, 755, cx-50, 800, fill=(70, 40, 60), outline=(50, 25, 45), radius=8)
+    rr(draw, cx+50, 755, cx+120, 800, fill=(70, 40, 60), outline=(50, 25, 45), radius=8)
+    rr(draw, cx-120, 535, cx+120, 560, fill=(40, 25, 55), outline=(30, 15, 40), radius=6)
+    save(img, os.path.join(OUT_DIR, "bottom", "bottom_salvar.png"))
 
-    # Eyebrows (straighter, thicker)
-    d.line([478, 118, 502, 120], (70, 55, 40), 4)
-    d.line([522, 120, 546, 118], (70, 55, 40), 4)
+def gen_bottom_etek():
+    img, draw = create_img()
+    cx = 512
+    poly(draw, [
+        (cx-90, 555), (cx+90, 555), (cx+130, 840), (cx-130, 840)
+    ], fill=(180, 50, 80), outline=(140, 30, 60))
+    for i in range(4):
+        yy = 580 + i * 65
+        draw.line([cx-110+i*8, yy, cx+110-i*8, yy], fill=GOLD, width=3)
+    rr(draw, cx-90, 540, cx+90, 560, fill=(60, 20, 40), outline=(40, 10, 25), radius=4)
+    save(img, os.path.join(OUT_DIR, "bottom", "bottom_etek.png"))
 
-    # Mouth (straight line)
-    d.line([500, 168, 524, 168], (170, 110, 100), 3)
+def gen_bottom_salvar_kisa():
+    img, draw = create_img()
+    cx = 512
+    rr(draw, cx-115, 550, cx+115, 710, fill=(100, 120, 140), outline=(70, 90, 110), radius=16)
+    rr(draw, cx-115, 693, cx-45, 725, fill=(90, 105, 125), outline=(60, 75, 95), radius=6)
+    rr(draw, cx+45, 693, cx+115, 725, fill=(90, 105, 125), outline=(60, 75, 95), radius=6)
+    rr(draw, cx-115, 535, cx+115, 560, fill=(60, 80, 100), outline=(40, 60, 80), radius=6)
+    save(img, os.path.join(OUT_DIR, "bottom", "bottom_salvar_kisa.png"))
 
-    # No blush — male version
 
-    img.save("assets/base_body_male.png")
+# ─── SHOES ───
 
-ASSET_PATHS = [
-    "assets/base_body.png",
-    "assets/base_body_male.png",
-    "assets/hair/hair_turban.png",
-    "assets/hair/hair_fes.png",
-    "assets/hair/hair_hotoz.png",
-    "assets/hair/hair_tac.png",
-    "assets/top/top_kaftan.png",
-    "assets/top/top_yelek.png",
-    "assets/top/top_bindalli.png",
-    "assets/top/top_gomlek.png",
-    "assets/bottom/bottom_salvar.png",
-    "assets/bottom/bottom_etek.png",
-    "assets/bottom/bottom_salvar_kisa.png",
-    "assets/shoes/shoes_cizme.png",
-    "assets/shoes/shoes_babuc.png",
-    "assets/shoes/shoes_takunya.png",
-    "assets/accessory/acc_kusak.png",
-    "assets/accessory/acc_kolye.png",
-    "assets/accessory/acc_kupe.png",
-    "assets/accessory/acc_bilezik.png",
-]
+def gen_shoes_cizme():
+    img, draw = create_img()
+    cx = 512
+    for side in [-1, 1]:
+        bx = cx + side * 60
+        poly(draw, [
+            (bx-20, 830), (bx+20, 830), (bx+20, 910), (bx-35, 910), (bx-40, 880)
+        ], fill=(60, 40, 30), outline=(40, 25, 15))
+        rr(draw, bx-22, 815, bx+22, 835, fill=(80, 55, 40), outline=(50, 35, 25), radius=4)
+    save(img, os.path.join(OUT_DIR, "shoes", "shoes_cizme.png"))
+
+def gen_shoes_babuc():
+    img, draw = create_img()
+    cx = 512
+    for side in [-1, 1]:
+        bx = cx + side * 55
+        ell(draw, bx-18, 855, bx+22, 890, fill=(180, 40, 60), outline=(140, 25, 45))
+        poly(draw, [
+            (bx+15, 858), (bx+40, 865), (bx+15, 880)
+        ], fill=(180, 40, 60), outline=(140, 25, 45))
+    save(img, os.path.join(OUT_DIR, "shoes", "shoes_babuc.png"))
+
+def gen_shoes_takunya():
+    img, draw = create_img()
+    cx = 512
+    for side in [-1, 1]:
+        bx = cx + side * 55
+        rr(draw, bx-18, 870, bx+22, 910, fill=(160, 130, 80), outline=(120, 95, 55), radius=6)
+        rr(draw, bx-8, 845, bx+8, 875, fill=(80, 40, 60), outline=(60, 25, 45), radius=4)
+    save(img, os.path.join(OUT_DIR, "shoes", "shoes_takunya.png"))
+
+
+# ─── ACCESSORIES ───
+
+def gen_acc_necklace():
+    img, draw = create_img()
+    cx = 512
+    draw.arc([cx-80, 340, cx+80, 450], start=0, end=180, fill=GOLD, width=5)
+    for i in range(8):
+        bx = cx - 60 + i * 17
+        ell(draw, bx-5, 400+abs(i-4)*8, bx+5, 415+abs(i-4)*8, fill=(TURQUOISE if i%2==0 else GOLD))
+    save(img, os.path.join(OUT_DIR, "accessory", "acc_necklace.png"))
+
+def gen_acc_glasses():
+    img, draw = create_img()
+    cx = 512
+    for side in [-1, 1]:
+        lx = cx + side * 55
+        ell(draw, lx-28, 95, lx+28, 150, fill=(200, 215, 230, 100), outline=(80, 80, 80), width=4)
+    draw.line([cx-27, 120, cx+27, 120], fill=(80, 80, 80), width=4)
+    draw.line([cx-83, 110, cx-110, 125], fill=(80, 80, 80), width=4)
+    draw.line([cx+83, 110, cx+110, 125], fill=(80, 80, 80), width=4)
+    save(img, os.path.join(OUT_DIR, "accessory", "acc_glasses.png"))
+
+def gen_acc_hat():
+    img, draw = create_img()
+    cx = 512
+    ell(draw, cx-120, 140, cx+120, 170, fill=(120, 80, 50), outline=(90, 55, 30))
+    rr(draw, cx-70, 20, cx+70, 145, fill=(140, 95, 60), outline=(110, 70, 40), radius=12)
+    rr(draw, cx-70, 110, cx+70, 135, fill=DARK_RED, outline=(100, 15, 25), radius=6)
+    save(img, os.path.join(OUT_DIR, "accessory", "acc_hat.png"))
+
+def gen_acc_crown():
+    img, draw = create_img()
+    cx = 512
+    rr(draw, cx-100, 40, cx+100, 140, fill=GOLD, outline=DARK_GOLD, radius=8)
+    for i in range(7):
+        px = cx - 80 + i * 27
+        poly(draw, [
+            (px-8, 40), (px, 0), (px+8, 40)
+        ], fill=GOLD, outline=DARK_GOLD)
+    for i in range(6):
+        jx = cx - 75 + i * 30
+        ell(draw, jx, 65, jx+16, 88, fill=TURQUOISE, outline=(40, 120, 120))
+    save(img, os.path.join(OUT_DIR, "accessory", "acc_crown.png"))
+
+def gen_acc_kolye():
+    img, draw = create_img()
+    cx = 512
+    for side in [-1, 1]:
+        draw.line([cx+side*40, 370, cx, 410], fill=GOLD, width=3)
+    poly(draw, [
+        (cx, 405), (cx-30, 480), (cx+30, 480)
+    ], fill=GOLD, outline=DARK_GOLD)
+    ell(draw, cx-14, 440, cx+14, 470, fill=(200, 50, 70))
+    save(img, os.path.join(OUT_DIR, "accessory", "acc_kolye.png"))
+
+def gen_acc_kupe():
+    img, draw = create_img()
+    cx = 512
+    # Left
+    draw.line([cx-82, 140, cx-95, 210], fill=GOLD, width=3)
+    ell(draw, cx-108, 195, cx-82, 235, fill=GOLD, outline=DARK_GOLD)
+    ell(draw, cx-104, 202, cx-86, 228, fill=TURQUOISE)
+    # Right
+    draw.line([cx+82, 140, cx+95, 210], fill=GOLD, width=3)
+    ell(draw, cx+82, 195, cx+108, 235, fill=GOLD, outline=DARK_GOLD)
+    ell(draw, cx+86, 202, cx+104, 228, fill=TURQUOISE)
+    save(img, os.path.join(OUT_DIR, "accessory", "acc_kupe.png"))
+
+def gen_acc_bilezik():
+    img, draw = create_img()
+    cx = 512
+    for side in [-1, 1]:
+        bx = cx + side * 128
+        for i in range(4):
+            ell(draw, bx-10+i*3, 460+i*4, bx+22+i*3, 485+i*4, fill=None, outline=GOLD, width=5)
+    save(img, os.path.join(OUT_DIR, "accessory", "acc_bilezik.png"))
+
+def gen_acc_kusak():
+    img, draw = create_img()
+    cx = 512
+    rr(draw, cx-135, 470, cx+135, 510, fill=(180, 40, 60), outline=(140, 25, 45), radius=6)
+    for i in range(5):
+        sx = cx - 100 + i * 50
+        rr(draw, sx, 477, sx+30, 503, fill=GOLD, outline=DARK_GOLD, radius=4)
+    poly(draw, [
+        (cx-30, 510), (cx-50, 570), (cx+10, 570)
+    ], fill=(180, 40, 60), outline=(140, 25, 45))
+    save(img, os.path.join(OUT_DIR, "accessory", "acc_kusak.png"))
+
+
+# ─── MAIN ───
 
 if __name__ == "__main__":
-    base_body()
-    base_body_male()
-    head_turban()
-    head_fes()
-    head_hotoz()
-    head_tac()
-    top_kaftan()
-    top_yelek()
-    top_bindalli()
-    top_gomlek()
-    bottom_salvar()
-    bottom_etek()
-    bottom_salvar_kisa()
-    shoes_cizme()
-    shoes_babuc()
-    shoes_takunya()
-    acc_kusak()
-    acc_kolye()
-    acc_kupe()
-    acc_bilezik()
+    print("Generating 1024x1024 assets (v2 - full-size characters)...")
 
-    for p in ASSET_PATHS:
-        img = Image.open(p)
-        square = Image.new("RGBA", (1024, 1024), (0, 0, 0, 0))
-        x = (1024 - img.width) // 2
-        y = (1024 - img.height) // 2
-        square.paste(img, (x, y), img)
-        square.save(p)
+    print("[Base Bodies]")
+    gen_base_body_female()
+    gen_base_body_male()
 
-    print("All Turkic clothing assets generated at 1024x1024.")
+    print("[Hair]")
+    gen_hair_turban(); gen_hair_fes(); gen_hair_hotoz(); gen_hair_tac()
+
+    print("[Tops]")
+    gen_top_kaftan(); gen_top_yelek(); gen_top_bindalli(); gen_top_gomlek()
+
+    print("[Bottoms]")
+    gen_bottom_salvar(); gen_bottom_etek(); gen_bottom_salvar_kisa()
+
+    print("[Shoes]")
+    gen_shoes_cizme(); gen_shoes_babuc(); gen_shoes_takunya()
+
+    print("[Accessories]")
+    gen_acc_necklace(); gen_acc_glasses(); gen_acc_hat(); gen_acc_crown()
+    gen_acc_kolye(); gen_acc_kupe(); gen_acc_bilezik(); gen_acc_kusak()
+
+    print("Done! All 23 assets regenerated at 1024x1024.")

@@ -80,7 +80,7 @@ func get_char_offset() -> Vector2:
 	return (size - Vector2(250, 300)) / 2
 
 func get_draw_offset() -> Vector2:
-	return Vector2(-256,0)
+	return Vector2(0,0)
 
 func get_zone_at(pos: Vector2) -> String:
 	for zone in body_zones:
