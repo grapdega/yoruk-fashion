@@ -80,6 +80,9 @@ func get_texture(path: String) -> Texture2D:
 func get_char_offset() -> Vector2:
 	return (size - Vector2(250, 300)) / 2
 
+func get_draw_offset() -> Vector2:
+	return get_char_offset() + Vector2(-350, -400)
+
 func get_zone_at(pos: Vector2) -> String:
 	for zone in body_zones:
 		if body_zones[zone].has_point(pos):
@@ -106,27 +109,28 @@ func _gui_input(event: InputEvent) -> void:
 
 func _draw() -> void:
 	var c = get_char_offset()
+	var dc = get_draw_offset()
 	draw_rect(Rect2(c.x - 10, c.y - 10, 270, 320), Color(0.88, 0.85, 0.82), true)
 	var base_tex = get_texture("res://assets/base_body.png")
 	if base_tex:
-		draw_texture(base_tex, c)
+		draw_texture(base_tex, dc)
 
 	var order = ["shoes", "bottom", "top"]
 	for cat in order:
 		if equipped.has(cat):
 			var tex = get_texture(equipped[cat]["tex"])
 			if tex:
-				draw_texture(tex, c)
+				draw_texture(tex, dc)
 
 	if equipped.has("hair"):
 		var tex = get_texture(equipped["hair"]["tex"])
 		if tex:
-			draw_texture(tex, c)
+			draw_texture(tex, dc)
 
 	if equipped.has("accessory"):
 		var tex = get_texture(equipped["accessory"]["tex"])
 		if tex:
-			draw_texture(tex, c)
+			draw_texture(tex, dc)
 
 	if hovered_zone and body_zones.has(hovered_zone):
 		var zone = body_zones[hovered_zone]
