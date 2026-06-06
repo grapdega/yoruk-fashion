@@ -1,32 +1,52 @@
 {
 	"hair": [
-		{"id": "hair1", "name": "Hair 1", "tex": "res://assets/famale/hair/hair1.png"},
-		{"id": "hair2", "name": "Hair 2", "tex": "res://assets/famale/hair/hair2.png"},
-		{"id": "hair3", "name": "Hair 3", "tex": "res://assets/famale/hair/hair3.png"}
+		{"id": "f_hair1", "name": "Hair 1", "tex": "res://assets/famale/hair/hair1.png", "gender": "female"},
+		{"id": "f_hair2", "name": "Hair 2", "tex": "res://assets/famale/hair/hair2.png", "gender": "female"},
+		{"id": "f_hair3", "name": "Hair 3", "tex": "res://assets/famale/hair/hair3.png", "gender": "female"},
+		{"id": "m_hair1", "name": "Hair 1", "tex": "res://assets/male/hair/hair1.png", "gender": "male"},
+		{"id": "m_hair2", "name": "Hair 2", "tex": "res://assets/male/hair/hair2.png", "gender": "male"},
+		{"id": "m_hair3", "name": "Hair 3", "tex": "res://assets/male/hair/hair3.png", "gender": "male"}
 	],
 	"top": [
-		{"id": "top1", "name": "Top 1", "tex": "res://assets/famale/top/top1.png"},
-		{"id": "top2", "name": "Top 2", "tex": "res://assets/famale/top/top2.png"},
-		{"id": "top3", "name": "Top 3", "tex": "res://assets/famale/top/top3.png"},
-		{"id": "top4", "name": "Top 4", "tex": "res://assets/famale/top/top4.png"}
+		{"id": "f_top1", "name": "Top 1", "tex": "res://assets/famale/top/top1.png", "gender": "female"},
+		{"id": "f_top2", "name": "Top 2", "tex": "res://assets/famale/top/top2.png", "gender": "female"},
+		{"id": "f_top3", "name": "Top 3", "tex": "res://assets/famale/top/top3.png", "gender": "female"},
+		{"id": "f_top4", "name": "Top 4", "tex": "res://assets/famale/top/top4.png", "gender": "female"},
+		{"id": "m_top1", "name": "Top 1", "tex": "res://assets/male/top/top1.png", "gender": "male"},
+		{"id": "m_top2", "name": "Top 2", "tex": "res://assets/male/top/top2.png", "gender": "male"},
+		{"id": "m_top3", "name": "Top 3", "tex": "res://assets/male/top/top3.png", "gender": "male"},
+		{"id": "m_top4", "name": "Top 4", "tex": "res://assets/male/top/top4.png", "gender": "male"}
 	],
 	"bottom": [
-		{"id": "bottom1", "name": "Bottom 1", "tex": "res://assets/famale/bottom/bottom1.png"},
-		{"id": "bottom2", "name": "Bottom 2", "tex": "res://assets/famale/bottom/bottom2.png"},
-		{"id": "bottom3", "name": "Bottom 3", "tex": "res://assets/famale/bottom/bottom3.png"},
-		{"id": "bottom4", "name": "Bottom 4", "tex": "res://assets/famale/bottom/bottom4.png"}
+		{"id": "f_bottom1", "name": "Bottom 1", "tex": "res://assets/famale/bottom/bottom1.png", "gender": "female"},
+		{"id": "f_bottom2", "name": "Bottom 2", "tex": "res://assets/famale/bottom/bottom2.png", "gender": "female"},
+		{"id": "f_bottom3", "name": "Bottom 3", "tex": "res://assets/famale/bottom/bottom3.png", "gender": "female"},
+		{"id": "f_bottom4", "name": "Bottom 4", "tex": "res://assets/famale/bottom/bottom4.png", "gender": "female"},
+		{"id": "m_bottom1", "name": "Bottom 1", "tex": "res://assets/male/bottom/bottom1.png", "gender": "male"},
+		{"id": "m_bottom2", "name": "Bottom 2", "tex": "res://assets/male/bottom/bottom2.png", "gender": "male"},
+		{"id": "m_bottom3", "name": "Bottom 3", "tex": "res://assets/male/bottom/bottom3.png", "gender": "male"},
+		{"id": "m_bottom4", "name": "Bottom 4", "tex": "res://assets/male/bottom/bottom4.png", "gender": "male"}
 	],
 	"shoes": [
-		{"id": "shoes1", "name": "Shoes 1", "tex": "res://assets/famale/shoes/shoes1.png"},
-		{"id": "shoes2", "name": "Shoes 2", "tex": "res://assets/famale/shoes/shoes2.png"},
-		{"id": "shoes3", "name": "Shoes 3", "tex": "res://assets/famale/shoes/shoes3.png"},
-		{"id": "shoes4", "name": "Shoes 4", "tex": "res://assets/famale/shoes/shoes4.png"}
+		{"id": "f_shoes1", "name": "Shoes 1", "tex": "res://assets/famale/shoes/shoes1.png", "gender": "female"},
+		{"id": "f_shoes2", "name": "Shoes 2", "tex": "res://assets/famale/shoes/shoes2.png", "gender": "female"},
+		{"id": "f_shoes3", "name": "Shoes 3", "tex": "res://assets/famale/shoes/shoes3.png", "gender": "female"},
+		{"id": "f_shoes4", "name": "Shoes 4", "tex": "res://assets/famale/shoes/shoes4.png", "gender": "female"},
+		{"id": "m_shoes1", "name": "Shoes 1", "tex": "res://assets/male/shoes/shoes1.png", "gender": "male"},
+		{"id": "m_shoes2", "name": "Shoes 2", "tex": "res://assets/male/shoes/shoes2.png", "gender": "male"},
+		{"id": "m_shoes3", "name": "Shoes 3", "tex": "res://assets/male/shoes/shoes3.png", "gender": "male"},
+		{"id": "m_shoes4", "name": "Shoes 4", "tex": "res://assets/male/shoes/shoes4.png", "gender": "male"}
 	],
 	"accessory": [
-		{"id": "accessory1", "name": "Accessory 1", "tex": "res://assets/famale/accessory/accessory1.png"},
-		{"id": "accessory2", "name": "Accessory 2", "tex": "res://assets/famale/accessory/accessory2.png"},
-		{"id": "accessory3", "name": "Accessory 3", "tex": "res://assets/famale/accessory/accessory3.png"},
-		{"id": "accessory4", "name": "Accessory 4", "tex": "res://assets/famale/accessory/accessory4.png"},
-		{"id": "accessory5", "name": "Accessory 5", "tex": "res://assets/famale/accessory/accessory5.png"}
+		{"id": "f_accessory1", "name": "Accessory 1", "tex": "res://assets/famale/accessory/accessory1.png", "gender": "female"},
+		{"id": "f_accessory2", "name": "Accessory 2", "tex": "res://assets/famale/accessory/accessory2.png", "gender": "female"},
+		{"id": "f_accessory3", "name": "Accessory 3", "tex": "res://assets/famale/accessory/accessory3.png", "gender": "female"},
+		{"id": "f_accessory4", "name": "Accessory 4", "tex": "res://assets/famale/accessory/accessory4.png", "gender": "female"},
+		{"id": "f_accessory5", "name": "Accessory 5", "tex": "res://assets/famale/accessory/accessory5.png", "gender": "female"},
+		{"id": "m_accessory1", "name": "Accessory 1", "tex": "res://assets/male/accessory/accessory1.png", "gender": "male"},
+		{"id": "m_accessory2", "name": "Accessory 2", "tex": "res://assets/male/accessory/accessory2.png", "gender": "male"},
+		{"id": "m_accessory3", "name": "Accessory 3", "tex": "res://assets/male/accessory/accessory3.png", "gender": "male"},
+		{"id": "m_accessory4", "name": "Accessory 4", "tex": "res://assets/male/accessory/accessory4.png", "gender": "male"},
+		{"id": "m_accessory5", "name": "Accessory 5", "tex": "res://assets/male/accessory/accessory5.png", "gender": "male"}
 	]
 }

@@ -29,6 +29,7 @@ func _ready() -> void:
 	next_btn.pressed.connect(_on_next_page)
 	char_display.item_equipped.connect(_on_char_item_changed)
 	char_display.item_unequipped.connect(_on_char_item_changed)
+	char_display.gender_changed.connect(_on_gender_changed)
 	female_btn.pressed.connect(_on_gender_pressed.bind("female"))
 	male_btn.pressed.connect(_on_gender_pressed.bind("male"))
 	_on_gender_pressed("female")
@@ -41,6 +42,11 @@ func _on_gender_pressed(g: String) -> void:
 	char_display.set_gender(g)
 	female_btn.button_pressed = g == "female"
 	male_btn.button_pressed = g == "male"
+
+func _on_gender_changed() -> void:
+	current_page = 0
+	if current_category:
+		refresh_items()
 
 func build_category_buttons() -> void:
 	var cat_names = {

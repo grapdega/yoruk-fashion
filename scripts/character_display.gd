@@ -2,6 +2,7 @@ extends Control
 
 signal item_equipped(category, item)
 signal item_unequipped(category)
+signal gender_changed()
 
 var equipped := {}
 var textures := {}
@@ -29,7 +30,12 @@ func _ready() -> void:
 		push_error("Failed to parse items.json")
 
 func get_items(category: String) -> Array:
-	return items.get(category, [])
+	var all = items.get(category, [])
+	var filtered := []
+	for item in all:
+		if item.get("gender", "female") == gender:
+			filtered.append(item)
+	return filtered
 
 func get_categories() -> Array:
 	return items.keys()
@@ -51,7 +57,7 @@ func get_equipped(category: String):
 	return equipped.get(category, null)
 
 func cycle_category(category: String) -> void:
-	var cat_items = items.get(category, [])
+	var cat_items = get_items(category)
 	if cat_items.is_empty():
 		return
 	var current = equipped.get(category)
@@ -99,7 +105,9 @@ func _gui_input(event: InputEvent) -> void:
 
 func set_gender(g: String) -> void:
 	gender = g
+	equipped.clear()
 	queue_redraw()
+	gender_changed.emit()
 
 func _draw() -> void:
 	var c = get_char_offset()
