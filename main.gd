@@ -6,6 +6,7 @@ const ITEMS_PER_PAGE := 9
 @onready var item_grid: GridContainer = $UI/Margin/VBox/ItemGrid
 @onready var cat_buttons: HBoxContainer = $UI/Margin/VBox/CategoryButtons
 @onready var remove_btn: Button = $UI/Margin/VBox/RemoveBtn
+@onready var exit_btn: Button = $ExitBtn
 @onready var category_label: Label = $UI/Margin/VBox/CategoryLabel
 @onready var prev_btn: Button = $UI/Margin/VBox/PageNav/PrevBtn
 @onready var next_btn: Button = $UI/Margin/VBox/PageNav/NextBtn
@@ -21,6 +22,7 @@ func _ready() -> void:
 	build_category_buttons()
 	select_category("top")
 	remove_btn.pressed.connect(_on_remove_pressed)
+	exit_btn.pressed.connect(_on_exit_pressed)
 	prev_btn.pressed.connect(_on_prev_page)
 	next_btn.pressed.connect(_on_next_page)
 	char_display.item_equipped.connect(_on_char_item_changed)
@@ -144,6 +146,9 @@ func _on_item_pressed(item: Dictionary) -> void:
 	else:
 		char_display.equip(current_category, item)
 	refresh_items()
+
+func _on_exit_pressed() -> void:
+	get_tree().quit()
 
 func _on_remove_pressed() -> void:
 	if current_category:
