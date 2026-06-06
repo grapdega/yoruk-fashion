@@ -6,6 +6,7 @@ signal item_unequipped(category)
 var equipped := {}
 var textures := {}
 var items := {}
+var gender := "female"
 
 var body_zones := {
 	"accessory": Rect2(70, 2, 110, 35),
@@ -14,8 +15,6 @@ var body_zones := {
 	"bottom":    Rect2(95, 170, 60, 70),
 	"shoes":     Rect2(95, 240, 60, 22),
 }
-
-var hovered_zone := ""
 
 func _ready() -> void:
 	var f = FileAccess.open("res://items.json", FileAccess.READ)
@@ -81,7 +80,7 @@ func get_char_offset() -> Vector2:
 	return (size - Vector2(250, 300)) / 2
 
 func get_draw_offset() -> Vector2:
-	return Vector2(-256, -256)
+	return Vector2(-256,0)
 
 func get_zone_at(pos: Vector2) -> String:
 	for zone in body_zones:
@@ -90,15 +89,6 @@ func get_zone_at(pos: Vector2) -> String:
 	return ""
 
 func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		var c = get_char_offset()
-		var local = event.position - c
-		var z = get_zone_at(local)
-		if z != hovered_zone:
-			hovered_zone = z
-			var hint = {"accessory": "Accessory", "hair": "Hair", "top": "Top", "bottom": "Bottom", "shoes": "Shoes"}
-			queue_redraw()
-
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		var c = get_char_offset()
 		var local = event.position - c
@@ -107,11 +97,15 @@ func _gui_input(event: InputEvent) -> void:
 			cycle_category(zone)
 			accept_event()
 
+func set_gender(g: String) -> void:
+	gender = g
+	queue_redraw()
+
 func _draw() -> void:
 	var c = get_char_offset()
 	var dc = get_draw_offset()
-	draw_rect(Rect2(c.x - 10, c.y - 10, 270, 320), Color(0.88, 0.85, 0.82), true)
-	var base_tex = get_texture("res://assets/base_body.png")
+	var base_path = "res://assets/base_body_male.png" if gender == "male" else "res://assets/base_body.png"
+	var base_tex = get_texture(base_path)
 	if base_tex:
 		draw_texture(base_tex, dc)
 
@@ -131,14 +125,3 @@ func _draw() -> void:
 		var tex = get_texture(equipped["accessory"]["tex"])
 		if tex:
 			draw_texture(tex, dc)
-
-	if hovered_zone and body_zones.has(hovered_zone):
-		var zone = body_zones[hovered_zone]
-		var zc = zone.get_center()
-		draw_rect(Rect2(c.x + zone.position.x, c.y + zone.position.y, zone.size.x, zone.size.y), Color(1, 1, 1, 0.15), true)
-		var label = {"accessory": "✧", "hair": "✧", "top": "✧", "bottom": "✧", "shoes": "✧"}
-		var txt = label.get(hovered_zone, "")
-		if txt:
-			var font = ThemeDB.fallback_font
-			var fs = ThemeDB.fallback_font_size
-			draw_string(font, c + Vector2(zone.position.x + 4, zone.position.y + fs + 2), txt, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color(1, 1, 1, 0.5))

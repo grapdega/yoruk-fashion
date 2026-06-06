@@ -81,6 +81,22 @@ theme_override_constants/margin_bottom = 16
 [node name="VBox" type="VBoxContainer" parent="UI/Margin" unique_id=1090243407]
 layout_mode = 2
 
+[node name="GenderButtons" type="HBoxContainer" parent="UI/Margin/VBox" unique_id=465531463]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+
+[node name="FemaleBtn" type="Button" parent="UI/Margin/VBox/GenderButtons" unique_id=293582064]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Female"
+
+[node name="MaleBtn" type="Button" parent="UI/Margin/VBox/GenderButtons" unique_id=1071860182]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Male"
+
 [node name="CategoryLabel" type="Label" parent="UI/Margin/VBox" unique_id=1922067217]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2

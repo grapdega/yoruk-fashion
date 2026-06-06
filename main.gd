@@ -10,6 +10,8 @@ const ITEMS_PER_PAGE := 9
 @onready var prev_btn: Button = $UI/Margin/VBox/PageNav/PrevBtn
 @onready var next_btn: Button = $UI/Margin/VBox/PageNav/NextBtn
 @onready var page_label: Label = $UI/Margin/VBox/PageNav/PageLabel
+@onready var female_btn: Button = $UI/Margin/VBox/GenderButtons/FemaleBtn
+@onready var male_btn: Button = $UI/Margin/VBox/GenderButtons/MaleBtn
 
 var category_btns := {}
 var current_category := ""
@@ -23,10 +25,18 @@ func _ready() -> void:
 	next_btn.pressed.connect(_on_next_page)
 	char_display.item_equipped.connect(_on_char_item_changed)
 	char_display.item_unequipped.connect(_on_char_item_changed)
+	female_btn.pressed.connect(_on_gender_pressed.bind("female"))
+	male_btn.pressed.connect(_on_gender_pressed.bind("male"))
+	_on_gender_pressed("female")
 
 func _on_char_item_changed(_cat = null, _item = null) -> void:
 	if current_category:
 		refresh_items()
+
+func _on_gender_pressed(g: String) -> void:
+	char_display.set_gender(g)
+	female_btn.button_pressed = g == "female"
+	male_btn.button_pressed = g == "male"
 
 func build_category_buttons() -> void:
 	var cat_names = {

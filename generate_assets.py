@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""High-quality Turkic traditional clothing assets at 512x1024."""
+"""High-quality Turkic traditional clothing assets at 1024x1024."""
 from PIL import Image, ImageDraw
 import math
 
-W, H = 512, 1024
+W, H = 1024, 1024
 GOLD = (255, 215, 0)
 DARK_GOLD = (200, 170, 0)
 
@@ -480,6 +480,29 @@ def base_body_male():
 
     img.save("assets/base_body_male.png")
 
+ASSET_PATHS = [
+    "assets/base_body.png",
+    "assets/base_body_male.png",
+    "assets/hair/hair_turban.png",
+    "assets/hair/hair_fes.png",
+    "assets/hair/hair_hotoz.png",
+    "assets/hair/hair_tac.png",
+    "assets/top/top_kaftan.png",
+    "assets/top/top_yelek.png",
+    "assets/top/top_bindalli.png",
+    "assets/top/top_gomlek.png",
+    "assets/bottom/bottom_salvar.png",
+    "assets/bottom/bottom_etek.png",
+    "assets/bottom/bottom_salvar_kisa.png",
+    "assets/shoes/shoes_cizme.png",
+    "assets/shoes/shoes_babuc.png",
+    "assets/shoes/shoes_takunya.png",
+    "assets/accessory/acc_kusak.png",
+    "assets/accessory/acc_kolye.png",
+    "assets/accessory/acc_kupe.png",
+    "assets/accessory/acc_bilezik.png",
+]
+
 if __name__ == "__main__":
     base_body()
     base_body_male()
@@ -501,4 +524,13 @@ if __name__ == "__main__":
     acc_kolye()
     acc_kupe()
     acc_bilezik()
-    print("All Turkic clothing assets generated at 1024x512.")
+
+    for p in ASSET_PATHS:
+        img = Image.open(p)
+        square = Image.new("RGBA", (1024, 1024), (0, 0, 0, 0))
+        x = (1024 - img.width) // 2
+        y = (1024 - img.height) // 2
+        square.paste(img, (x, y), img)
+        square.save(p)
+
+    print("All Turkic clothing assets generated at 1024x1024.")
